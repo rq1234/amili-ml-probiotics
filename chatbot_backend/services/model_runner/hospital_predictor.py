@@ -38,10 +38,7 @@ def simple_label_encode(df: pd.DataFrame) -> pd.DataFrame:
 
 
 # ─── PREDICTION FUNCTION ───────────────────────────────
-def predict_readmission(filename: str) -> str:
-    """
-    Takes the filename (inside /data), returns CSV string with predictions.
-    """
+def predict_readmission(filename: str) -> dict:
     filepath = DATA_DIR / filename
     if not filepath.exists():
         raise FileNotFoundError(f"File not found: {filepath}")
@@ -51,9 +48,26 @@ def predict_readmission(filename: str) -> str:
     preds = model.predict(df_encoded[FEATURES])
 
     label_map = {0: "<30", 1: ">30", 2: "NO"}
-    df["readmission_prediction"] = [label_map[p] for p in preds]
+    mapped_preds = [label_map[p] for p in preds]
 
-    output = io.StringIO()
-    df.to_csv(output, index=False)
-    output.seek(0)
-    return output.read()
+    df["readmission_prediction"] = mapped_preds
+
+    summary = {
+        "total_samples": len(preds),
+        "predicted_<30": mapped_preds.count("<30"),
+        "predicted_>30": mapped_preds.count(">30"),
+        "predicted_NO": mapped_preds.count("NO")
+    }
+
+    results = [
+        {
+            "patient_id": int(i),
+            "readmission_prediction": mapped_preds[i]
+        }
+        for i in range(len(df))
+    ]
+
+    return {
+        "summary": summary,
+        "results": results
+    }
