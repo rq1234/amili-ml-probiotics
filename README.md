@@ -68,7 +68,6 @@ AMILI-ML-PROBIOTICS/
 ### Gut_Microbiome_ASD.ipynb
 This notebook analyses gut microbiome composition from 16S rRNA OTU data to infer Autism Spectrum Disorder (ASD) using machine learning.
 
-Based on the study: Altered gut microbial profile is associated with abnormal metabolism activity of Autism Spectrum Disorder
 
 Applies preprocessing, label encoding, and XGBoost classification
 
@@ -80,7 +79,7 @@ Uses abund-16S-model.json as the trained model
 ### Hospital.ipynb
 This notebook processes structured hospital data to predict 30-day readmission risk using features such as diagnosis codes, age, and discharge type.
 
-Includes steps for data cleaning, encoding, and feature engineering
+Includes steps for data cleaning, encoding, and feature engineering. Includes hyperparameter tuning as well. 
 
 Trains an XGBoost model for multiclass classification (<30, >30, or NO readmission)
 
