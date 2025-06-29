@@ -33,6 +33,7 @@ python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
+```
 ---
 
 ## 📁 Project Structure
@@ -61,7 +62,7 @@ AMILI-ML-PROBIOTICS/
 │
 │
 ├── README.md                         # You're here!
-
+```
 ## 📌 Possible Areas of Analysis
 
 ---
